@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/bot_db
+    username: postgres
+    password: postgres
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/db-changelog-master.xml
+    default-schema: public
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        default_schema: public
+
+bot:
+  botName: SimplePetyaBot
+  botToken: your token
+
+yandex-api:
+  apiUrl: https://api.weather.yandex.ru/v2/forecast?
+  apiKey: 20730ff5-f0f4-4b4c-b621-f6baf561627b
+  apiLang: ru_RU
+
+geo-api:
+  geoUrl: https://geocode-maps.yandex.ru/1.x/?apikey=
+  geoKey: your key
