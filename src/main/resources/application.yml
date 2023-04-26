@@ -26,7 +26,7 @@ bot:
 
 yandex-api:
   apiUrl: https://api.weather.yandex.ru/v2/forecast?
-  apiKey: 20730ff5-f0f4-4b4c-b621-f6baf561627b
+  apiKey: your key
   apiLang: ru_RU
 
 geo-api:

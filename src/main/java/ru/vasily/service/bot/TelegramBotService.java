@@ -9,9 +9,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import static ru.vasily.config.BotCommands.*;
-import static ru.vasily.config.BotMessages.*;
-
 import ru.vasily.config.BotConfig;
 import ru.vasily.dto.geo.LocationDto;
 import ru.vasily.dto.weather.WeatherDto;
@@ -22,6 +19,9 @@ import ru.vasily.service.weather.WeatherClientService;
 
 import java.io.IOException;
 import java.util.Optional;
+
+import static ru.vasily.config.BotCommands.*;
+import static ru.vasily.config.BotMessages.*;
 
 @Slf4j
 @Component
@@ -47,7 +47,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
 
             if (textCommand.startsWith(WEATHER) && !textCommand.endsWith(WEATHER)) {
-                sendWeather(chatId, textCommand);
+                sendWeatherMessage(chatId, textCommand);
             }
 
             switch (textCommand) {
@@ -64,12 +64,12 @@ public class TelegramBotService extends TelegramLongPollingBot {
         }
     }
 
-    private void sendWeather(Long chatId, String textMessage) {
+    private void sendWeatherMessage(Long chatId, String textMessage) {
         log.info("TelegramBotService: sendWeather {}", textMessage);
         WeatherDto weather = null;
         try {
-            LocationDto location = geoService.requestToApiGeo(textMessage.substring(textMessage.indexOf(" ")).trim());
-            weather = location != null ? weatherService.requestToApiWeather(String.valueOf(location.getLat()),
+            LocationDto location = geoService.requestApiGeo(textMessage.substring(textMessage.indexOf(" ")).trim());
+            weather = location != null ? weatherService.requestApiWeather(String.valueOf(location.getLat()),
                     String.valueOf(location.getLng())) : null;
 
         } catch (IOException e) {

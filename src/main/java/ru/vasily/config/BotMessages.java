@@ -35,7 +35,7 @@ public class BotMessages {
         String season = weather.getFact().getSeason();
         String precipitation = precipitationMap.get(weather.getFact().getPrecipitation());
 
-        return "Сечас в вашем городе: " + temp + " °C  \n" +
+        return "Сейчас в вашем городе: " + temp + " °C  \n" +
                 "Осадки: " + precipitation + "\n" +
                 "Скороть ветра:  " + windSpeed + " М/С \n" +
                 "Влажность воздуха: " + humidity + " % \n" +

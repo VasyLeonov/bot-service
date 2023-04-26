@@ -20,7 +20,7 @@ public class GeoClientService {
 
     private final BotConfig config;
 
-    public LocationDto requestToApiGeo(String address) throws IOException {
+    public LocationDto requestApiGeo(String address) throws IOException {
         log.info("GeoClientService: requestToApiGeo {}", address);
 
         String uri = config.getGeoUrl() + config.getGeoKey() +"&format=json&geocode=" +
@@ -41,7 +41,7 @@ public class GeoClientService {
         return  new LocationDto(lat, lng);
     }
 
-    private static String readAll(final Reader rd) throws IOException {
+    private String readAll(final Reader rd) throws IOException {
         final StringBuilder builder = new StringBuilder();
         int cp;
         while ((cp = rd.read()) != -1) {
@@ -50,7 +50,7 @@ public class GeoClientService {
         return builder.toString();
     }
 
-    public static JSONObject read(final String url) throws IOException, JSONException {
+    private JSONObject read(final String url) throws IOException, JSONException {
         final InputStream stream = new URL(url).openStream();
         try {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(stream,

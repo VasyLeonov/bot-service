@@ -19,16 +19,14 @@ public class WeatherClientService {
 
     private final BotConfig config;
 
-    public WeatherDto requestToApiWeather(String lat, String lon) throws IOException {
+    public WeatherDto requestApiWeather(String lat, String lon) throws IOException {
         log.info("WeatherClientService: requestWeather {}", lat + " " + lon);
 
         CloseableHttpClient client = HttpClients.createDefault();
-
         String uri = config.getWeatherUrl().concat("lat=" + lat + "&lon=" +
                 lon + "&lang=" + config.getApiLang() + "&extra=true");
 
         ObjectMapper mapper = new ObjectMapper();
-
         HttpGet request = new HttpGet(uri);
         request.setHeader("X-Yandex-API-Key", config.getApiKey());
 
