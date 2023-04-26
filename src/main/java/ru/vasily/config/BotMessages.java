@@ -18,6 +18,8 @@ public class BotMessages {
     public static final String HELP_MESSAGE_WEATHER = "Введите адрес после " +
             "команды /weather \n Например: /weather Москва, улица Новый Арбат";
 
+    public static final String NOT_SUPPORTED = "Sorry, I can't do that yet";
+
     public static final String HELP_MESSAGE = """
             Пока что, я поддерживаю комманды: \s
              /start начать общение,
@@ -35,7 +37,8 @@ public class BotMessages {
         String season = weather.getFact().getSeason();
         String precipitation = precipitationMap.get(weather.getFact().getPrecipitation());
 
-        return "Сейчас в вашем городе: " + temp + " °C  \n" +
+        return "Погода в " + weather.getAddress() + "\n" +
+                "Температура: " + temp + " °C  \n" +
                 "Осадки: " + precipitation + "\n" +
                 "Скороть ветра:  " + windSpeed + " М/С \n" +
                 "Влажность воздуха: " + humidity + " % \n" +

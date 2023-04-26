@@ -1,10 +1,8 @@
 package ru.vasily.config;
 
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
-import ru.vasily.dto.weather.WeatherDto;
 
 import java.util.List;
-import java.util.Map;
 
 public class BotCommands {
 

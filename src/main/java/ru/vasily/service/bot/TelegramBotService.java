@@ -58,7 +58,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
                 case REGISTER -> registerChatUser(chatId, update);
                 case HELP -> sendMessage(chatId, HELP_MESSAGE);
                 case WEATHER -> sendMessage(chatId, HELP_MESSAGE_WEATHER);
-                case GET_NEWS -> sendMessage(chatId, "Sorry, I can't do that yet");
+                case GET_NEWS -> sendMessage(chatId, NOT_SUPPORTED);
                 default -> sendMessage(chatId, "");
             }
         }
@@ -67,8 +67,9 @@ public class TelegramBotService extends TelegramLongPollingBot {
     private void sendWeatherMessage(Long chatId, String textMessage) {
         log.info("TelegramBotService: sendWeather {}", textMessage);
         WeatherDto weather = null;
+        String address = textMessage.substring(textMessage.indexOf(" ")).trim();
         try {
-            LocationDto location = geoService.requestApiGeo(textMessage.substring(textMessage.indexOf(" ")).trim());
+            LocationDto location = geoService.requestApiGeo(address);
             weather = location != null ? weatherService.requestApiWeather(String.valueOf(location.getLat()),
                     String.valueOf(location.getLng())) : null;
 
@@ -77,6 +78,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
         }
 
         if (weather != null) {
+            weather.setAddress(address);
             sendMessage(chatId, weatherMessage(weather));
         } else {
             sendMessage(chatId, ERROR_MESSAGE_WEATHER);

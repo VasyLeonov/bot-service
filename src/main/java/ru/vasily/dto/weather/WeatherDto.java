@@ -15,6 +15,8 @@ public class WeatherDto {
     @JsonProperty("now")
     private Long now;
 
+    private String address;
+
     @JsonProperty("now_dt")
     private String nowDate;
 
